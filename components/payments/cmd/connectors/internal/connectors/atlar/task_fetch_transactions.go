@@ -212,6 +212,9 @@ func ExtractPaymentMetadata(paymentId models.PaymentID, transaction *atlar_model
 		result = append(result, ComputePaymentMetadata(paymentId, "virtualAccount/identifier/market", transaction.Characteristics.VirtualAccount.Identifier.Market))
 		result = append(result, ComputePaymentMetadata(paymentId, "virtualAccount/identifier/type", transaction.Characteristics.VirtualAccount.Identifier.Type))
 		result = append(result, ComputePaymentMetadata(paymentId, "virtualAccount/identifier/number", transaction.Characteristics.VirtualAccount.Identifier.Number))
+		if transaction.Characteristics.VirtualAccount.Identifier.Type == "IBAN" {
+			result = append(result, ComputePaymentMetadata(paymentId, "virtualAccount/IBAN", transaction.Characteristics.VirtualAccount.Identifier.Number))
+		}
 	}
 	result = append(result, ComputePaymentMetadata(paymentId, "reconciliation/status", transaction.Reconciliation.Status))
 	result = append(result, ComputePaymentMetadata(paymentId, "reconciliation/transactableId", transaction.Reconciliation.TransactableID))
